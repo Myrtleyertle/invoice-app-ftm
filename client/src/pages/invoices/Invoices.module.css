@@ -3,7 +3,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 20px 5px;
+    margin: 25px 5px;
 }
 .headertitle{
     margin: 0;
@@ -11,7 +11,7 @@
 }
 .subtitle{
     margin: 0;
-    font-size: 15px;
+    font-size: 25px;
 }
 .select{
     border: none;
@@ -19,15 +19,16 @@
 }
 .invbtn{
     margin: 0;
-    padding: 10px;
-    height: 40px;
+    padding: 20px;
+    height: 50px;
     border: none;
     background-color: rgb(155, 54, 238);;
-    border-radius: 25px;
-    font-size: .8rem;
+    border-radius: 20px;
+    font-size: 1rem;
     color: rgb(255, 255, 255);
     cursor: pointer;
 }
+
 button:hover{
     color: rgb(255, 255, 255);
     transform: scale(1.1);
@@ -35,22 +36,30 @@ button:hover{
 .plus{
     background-color: #f0ecec;
     color: rgb(122, 38, 190);
-    border-radius: 50%;
+    border-radius: 55%;
     padding: 5px;
+    margin: 0 10px;
 }
 .invoiceslist{
     display: flex;
     flex-direction: column;
-    gap: 10px
 }
 .invoice{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    margin: 5px;
+    margin: 10px;
+    padding: 25px;
     background-color: #f8f8f8;
     border-radius: 10px;
-    gap: 10px;
+}
+.invoice:hover {
+    border: #384046 1px solid;
+    transform: scale(1.04);
+    cursor: pointer;
+}
+.link:link{
+    text-decoration: none;
 }
 .header{
     display: flex;
@@ -67,13 +76,22 @@ button:hover{
     margin: 0;
     color: rgb(153, 153, 153)
 }
+
 .createdAt{
     margin: 0;
     font-size: 1rem;
     color: rgb(179, 179, 179);
 }
+.id,
+.total{
+    color: #384046;
+    font-size: 20px;
+    font-weight: 500;
+
+}
 .status{
     display: flex;
+    align-items: center;
     justify-content: space-between;
     margin: 0;
 }
@@ -81,7 +99,7 @@ button:hover{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0;
+    margin: 0 5px;
     width: 50px;
     color: #44f100;
 }
@@ -89,7 +107,7 @@ button:hover{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0;
+    margin: 0 5px;
     width:  70px;
     color: #ff9800;
 }
@@ -97,7 +115,7 @@ button:hover{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0;
+    margin: 0 5px;
     width: 50px;
     color: #384046;
 }

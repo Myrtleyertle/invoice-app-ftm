@@ -37,7 +37,7 @@ export const Sidebar = () => {
             />
           </svg>
         )}
-        <img src={avatar} className={classes.avatar} alt="avatar" />
+        <img src={avatar} className={classes.avataricon} alt="avatar" />
       </div>
     </div>
   );

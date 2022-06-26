@@ -1,145 +1,256 @@
-import React from "react";
+import { useContext, Fragment, useState } from "react";
 import ReactDOM from "react-dom";
-import { Offcanvas, Button, Form, Dropdown } from "react-bootstrap";
-import classes from "../pages/invoices/Invoices.module.css";
+import { Button, Form } from "react-bootstrap";
+import classes from "./NewInvoiceModal.module.css";
+import { DataContext } from "../data/state/DataContext";
+
 export const ModalOverlay = (props) => {
+  const data = useContext(DataContext);
+  const { submitNewInvoice } = data;
+  const [list, setList] = useState([]);
+  const [newItem , setNewItem] = useState()
+  const addNewItem = (e) => {
+    e.preventDefault();
+    const newList = [...list, newItem];
+    setList(newList);
+  };
   return (
-    <React.Fragment>
-      <button
-        onClick={() => props.setShow(!props.show)}
-        className={classes.invbtn}
-      >
-        <span className={classes.plus}>+</span> New Invoice{" "}
-      </button>
-      <Offcanvas className={classes.offcanvas} show={props.show}>
-        <Offcanvas.Header>
-          <Offcanvas.Title>New Invoice</Offcanvas.Title>
-          <button
-            onClick={() => props.setShow(!props.show)}
-            style={{ border: "none" }}
+    <div className={classes.modaloverlay}>
+      <div className={classes.offcanvas}>
+        <div className={classes.btnheader}>
+          <h1>New Invoice</h1>
+        </div>
+        <h5 className={classes.billfrom}>Bill From</h5>
+        <div className={classes.form}>
+          <Form
+            id="new-invoice"
+            method="post"
+            onSubmit={(e) => submitNewInvoice(e)}
           >
-            X
-          </button>
-        </Offcanvas.Header>
-        <div className={classes.billform}>Bill From</div>
-        <Offcanvas.Body>
-          <Form>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Street Address</Form.Label>
-              <Form.Control type="email" placeholder="Enter street address" />
-            </Form.Group>
-            <div className={classes.Address}>
-              <Form.Group>
-                <Form.Label>City</Form.Label>
-                <Form.Control type="text" placeholder="Enter City" />
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>Postal Code</Form.Label>
-                <Form.Control type="text" placeholder="Enter Postal Code" />
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>Country</Form.Label>
-                <Form.Control type="text" placeholder="Enter Country" />
-              </Form.Group>
+            <div className={classes.street}>
+              <label className={classes.formLabel} htmlFor="senderAddress">Street Address</label>
+              <input
+                id="street"
+                type="text"
+                name="senderAddress"
+                className={classes.forminput}
+                placeholder="Enter street address"
+              />
+            </div>
+            <div className={classes.senderAddress}>
+              <div className={classes.frow}>
+                <label className={classes.formLabel} htmlFor="city">City</label>
+                <input
+                  id="city"
+                  name="city"
+                  type="text"
+                  className={classes.forminput}
+                  placeholder="Enter City"
+                />
+              </div>
+              <div className={classes.frow}>
+                <label className={classes.formLabel} htmlFor="postCode">Post Code</label>
+                <input
+                  id="postCode"
+                  type="text"
+                  name="postCode"
+                  className={classes.forminput}
+                  placeholder="Enter Post Code"
+                />
+              </div>
+              <div className={classes.frow}>
+                <label className={classes.formLabel} htmlFor="country">Country</label>
+                <input
+                  id="country"
+                  className={classes.forminput}
+                  type="text"
+                  placeholder="Enter Country"
+                />
+              </div>
+            </div>
+            <h5 className={classes.billto}>Bill To</h5>
+            <div className={classes.frow}>
+              <label className={classes.formLabel} htmlFor="clientName">Client Name</label>
+              <input
+                id="clientName"
+                type="text"
+                name="clientName"
+                className={classes.forminput}
+                placeholder="Enter Client Name"
+              />
+            </div>
+            <div className={classes.frow}>
+              <label className={classes.formLabel} htmlFor="clientEmail">Client's Email</label>
+              <input
+                id="clientEmail"
+                type="text"
+                name="clientEmail"
+                className={classes.forminput}
+                placeholder="e.g.email@example.com"
+              />
+            </div>
+            <div className={classes.frow}>
+              <label className={classes.formLabel} htmlFor="clientAddress">Client's Address</label>
+              <input
+                id="clientAddress"
+                type="text"
+                className={classes.forminput}
+                placeholder="Enter Client's Address"
+              />
+            </div>
+            <div className={classes.clientAddress}>
+              <div className={classes.frow}>
+                <label className={classes.formLabel} htmlFor="clientCity">City</label>
+                <input
+                  id="clientCity"
+                  name="clientCity"
+                  className={classes.forminput}
+                  type="text"
+                  placeholder="Enter City"
+                />
+              </div>
+              <div className={classes.frow}>
+                <label className={classes.formLabel} htmlFor="clientPostcode">Postal Code</label>
+                <input
+                  id="clientPostCode"
+                  type="text"
+                  className={classes.forminput}
+                  name="billPostCode"
+                  placeholder="Enter Postal Code"
+                />
+              </div>
+              <div className={classes.frow}>
+                <label className={classes.formLabel} htmlFor="clientCountry">Country</label>
+                <input
+                  id="clientCountry"
+                  className={classes.forminput}
+                  type="text"
+                  name="clientCountry"
+                  placeholder="Enter Country"
+                />
+              </div>
+            </div>
+            <div className={classes.datepayment}>
+              <div className={classes.frow}>
+                <label className={classes.formLabel} htmlFor="invoiceDate">Invoice Date</label>
+                <input
+                  id="invoiceDate"
+                  className={classes.forminput}
+                  type="date"
+                  name="invoiceDate"
+                  placeholder="Enter Invoice Date"
+                />
+              </div>
+              <div className={classes.frow}>
+                <label className={classes.formLabel} htmlFor="paymentTerms">Payment Terms</label>
+                <select
+                  id="paymentTerms"
+                  name="paymentTerms"
+                  className={classes.forminput}
+                  title="Invoice Terms"
+                >
+                  <option value="1">Net 1 Day</option>
+                  <option value="7">Net 7 Days</option>
+                  <option value="14">Net 14 Days</option>
+                  <option value="30">Net 30 Days</option>
+                </select>
+              </div>
+            </div>
+            <label className={classes.formLabel} htmlFor="description">Project Description</label>
+            <input
+              type="text"
+              id="description"
+              className={classes.forminput}
+              name="description"
+              placeholder="Enter Project Description"
+            />
+            <div className={classes.list}>
+              <label className={classes.formLabel} htmlFor="listName">Name</label>
+              <label className={classes.formLabel} htmlFor="quantity">Quantity</label>
+              <label className={classes.formLabel} htmlFor="price">Price</label>
+              <label className={classes.formLabel} htmlFor="total">Total</label>
+            </div>
+            {list.map((item, index) =>  (
+    <div className={classes.list}>
+      <input
+        id="listName"
+        type="text"
+        className={classes.forminput}
+        name="listName"
+        placeholder="Enter Item Name"
+      />
+      <input
+        id="quantity"
+        type="text"
+        className={classes.forminput}
+        name="quantity"
+        placeholder="Enter Item Quantity"
+      />
+      <input
+        name="price"
+        id="price"
+        className={classes.forminput}
+        type="text"
+        placeholder="Enter Item Price"
+      />
+      <input
+        id="total"
+        name="total"
+        type="text"
+        className={classes.forminput}
+        placeholder="Enter Item Total"
+      />
+    </div>
+  ))}
+            <Button onClick={() => addNewItem()}>Add Item</Button>
+            <div className={classes.btns}>
+              <Button
+                onClick={() => props.setShow(!props.show)}
+                style={{
+                  border: "none",
+                  background: "transparent",
+                  color: "grey",
+                }}
+              >
+                discard
+              </Button>
+              <div>
+                <Button variant="light">Save to draft</Button>
+                <Button type="submit" variant="light">
+                  Save & Send
+                </Button>
+              </div>
             </div>
           </Form>
-          <div>
-            <div className={classes.billform}>Bill To</div>
-            <Form>
-              <Form.Group>
-                <Form.Label>Client Name</Form.Label>
-                <Form.Control type="text" placeholder="Enter Client Name" />
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>Client's Email</Form.Label>
-                <Form.Control type="text" placeholder="e.g.email@example.com" />
-              </Form.Group>
-              <div className={classes.Address}>
-                <Form.Group>
-                  <Form.Label>City</Form.Label>
-                  <Form.Control type="text" placeholder="Enter City" />
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Postal Code</Form.Label>
-                  <Form.Control type="text" placeholder="Enter Postal Code" />
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Country</Form.Label>
-                  <Form.Control type="text" placeholder="Enter Country" />
-                </Form.Group>
-              </div>
-              <div className={classes.Address}>
-                <Form.Group>
-                  <Form.Label>Invoice Date</Form.Label>
-                  <Form.Control type="date" placeholder="Enter Invoice Date" />
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Payment Terms</Form.Label>
-                <select className="form-control"  title="Invoice Terms">
-                    <option>Net 1 Day</option>
-                    <option>Net 7 Days</option>
-                    <option>Net 14 Days</option>
-                    <option>Net 30 Days</option>
-                </select>
-                </Form.Group>
-              </div>
-            </Form>
-          </div>
-          <Form>
-              <Form.Group>
-                <Form.Label>Project Description</Form.Label>
-                <Form.Control type="text" placeholder="Enter Project Description" />
-                </Form.Group>
-          </Form>
-          <div>Item List</div>
-            <Form>
-                <div className={classes.Address}>
-
-                <Form.Group>
-                    <Form.Label>Item Name</Form.Label>
-                    <Form.Control type="text" placeholder="Enter Item Name" />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Item Quantity</Form.Label>
-                    <Form.Control type="text" placeholder="Enter Item Quantity" />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Item Price</Form.Label>
-                    <Form.Control type="text" placeholder="Enter Item Price" />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Item Total</Form.Label>
-                    <Form.Control type="text" placeholder="Enter Item Total" />
-                </Form.Group>
-                </div>
-                <Button variant='light'>+ Add New Item</Button>
-            </Form>
-            <Button variant='light'>
-                Cancel
-                </Button>
-            <Button variant='light'>
-                Save & Send
-                </Button>
-        </Offcanvas.Body>
-      </Offcanvas>
-    </React.Fragment>
+        </div>
+      </div>
+    </div>
   );
 };
 const Backdrop = (props) => {
-  return <div className={classes.backdrop}></div>;
-};
-const NewInvoiceModal = (props) => {
-  const [show, setShow] = React.useState(false);
   return (
-    <React.Fragment>
+    <div
+      onClick={() => props.setShow(!props.show)}
+      className={classes.backdrop}
+    ></div>
+  );
+};
+const NewInvoiceModal = ({ show, setShow }) => {
+  return (
+    <Fragment>
       {show
         ? ReactDOM.createPortal(
             <Backdrop show={show} setShow={setShow} />,
-            document.getElementById("modal-root") 
+            document.getElementById("modal-root")
           )
         : null}
-      <ModalOverlay show={show} setShow={setShow} />
-    </React.Fragment>
+      {show
+        ? ReactDOM.createPortal(
+            <ModalOverlay show={show} setShow={setShow} />,
+            document.getElementById("modal-root")
+          )
+        : null}
+    </Fragment>
   );
 };
 

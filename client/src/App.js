@@ -19,7 +19,7 @@ function App() {
         setWidth(window.innerWidth);
       });
     };
-  }, []);
+  }, [getInvoices]);
   return (
     <div className={classes.App}>
       {width > 450 ? <Sidebar /> : <MobileSidebar />}
