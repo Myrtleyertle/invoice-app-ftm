@@ -7,7 +7,7 @@ import { Invoice } from "./Invoice";
 export const Invoices = () => {
   const [show, setShow] = useState(false);
   const data = useContext(DataContext);
-  const { invoices, setFilter, setActiveInvoice, filter } = data;
+  const { invoices, setFilter, setIndex, filter, setActiveInvoice } = data;
   const filteredInvoices = invoices.filter((invoice) => {
     if (filter === "") {
       return invoice;
@@ -16,11 +16,14 @@ export const Invoices = () => {
     }
   });
   const Invoices = filteredInvoices.map((invoice, index) => {
+    
     return (
       <Link
         className={classes.link}
-        to="/Invoice"
-        onClick={() => setActiveInvoice(index)}
+        to={`/Invoice/${invoice.id}`}
+        onClick={() => {
+          setActiveInvoice(index);
+        }}
       >
         <div className={classes.invoice} key={index}>
           <div className={classes.id}>#{invoice.id}</div>

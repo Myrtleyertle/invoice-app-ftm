@@ -1,14 +1,14 @@
+const axios = require('axios')
 const URL = "http://localhost:7000";
-async function httpGetInvoices() {
-  const response = await fetch(`${URL}/invoices`);
-  return await response.json();
- 
-}
+const getInvoices = axios.get(`${URL}`)
 
+async function httpGetAllInvoices(){
+  return await axios.get(`${URL}/invoices`)
+}
 async function httpAddNewInvoice(invoice) {
     console.log(invoice)
     try{
-      return await fetch(`${URL}/invoices`, {
+      return await axios.post(`${URL}/invoices`, {
        method: 'post',
        headers: {
            'Content-Type': 'application/json'
@@ -27,11 +27,9 @@ async function httpAddNewInvoice(invoice) {
 }
 async function httpDeleteInvoice(id) {
     try{
-      return await fetch(`${URL}/invoices/${id}`, {
+      return await axios.delete({
        method: 'delete',
-       headers: {
-           'Content-Type': 'application/json'
-       }
+       url: `${URL}/invoices/${id}`
       })
 
     }
@@ -45,7 +43,7 @@ async function httpDeleteInvoice(id) {
 }
 async function httpEditInvoice(id, invoice) {
     try{
-      return await fetch(`${URL}/invoices/${id}`, {
+      return await axios.put(`${URL}/invoices/${id}`, {
         method: 'put',
         headers: {
             'Content-Type': 'application/json'
@@ -62,15 +60,16 @@ async function httpEditInvoice(id, invoice) {
     }
   
 }
-async function httpMarkAsPaid(id, status) {
+async function httpMarkAsPaid(id) {
+  console.log(id)
     try{
       return await fetch(`${URL}/invoices/${id}`, {
         method: 'put',
         headers: {
             'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(id)
-       })
+        }
+        })
+
 
     }
     catch(error){
@@ -81,18 +80,5 @@ async function httpMarkAsPaid(id, status) {
     }
   
 }
-async function httpGetInvoice(id){
-  try{
-    return await fetch(`${URL}/invoices/${id}`,{
-      method: 'post',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(id)
-    })
-  } catch(error) {
-    console.log(error)
-    return{
-      ok: false
-    }
-  }
-}
-export { httpGetInvoices, httpAddNewInvoice, httpDeleteInvoice, httpEditInvoice, httpMarkAsPaid, httpGetInvoice  };
+
+export { httpGetAllInvoices, httpAddNewInvoice, httpDeleteInvoice, httpEditInvoice, httpMarkAsPaid  };

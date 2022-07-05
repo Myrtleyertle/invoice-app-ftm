@@ -1,4 +1,4 @@
-const {editInvoice, getAllInvoices, addNewInvoice, removeInvoice, markAsPaid } = require('../models/invoices.model');
+const {invoices,editInvoice, getAllInvoices, addNewInvoice, removeInvoice, markAsPaid, getInvoice } = require('../models/invoices.model');
 
 function httpGetAllInvoices(req, res){
     return res.status(200).json(getAllInvoices())
@@ -68,7 +68,7 @@ function httpEditInvoice(req, res){
 
 }
 function httpMarkAsPaid(req, res){
-    const id = req.body;
+    const id = req.params.id;
     console.log(id)
     markAsPaid(id)
     res.status(200).json({
@@ -76,9 +76,9 @@ function httpMarkAsPaid(req, res){
     })
 }
 function httpGetInvoice(req, res){
-     const id = req.params.id;
-     const invoice = getInvoice(id)
-        res.status(200).json(invoice) 
+    const id = req.params.id;
+    const invoice = invoices.get(id)
+    res.status(200).json(invoice)
 }
 module.exports = {
     httpGetAllInvoices,

@@ -33,11 +33,14 @@ function getAllInvoices() {
   return Array.from(invoices.values());
 }
 function getInvoice(id){
+  console.log(invoices.get(id))
   return invoices.get(id)
 }
 function markAsPaid(id){
-  invoices.set(id, Object.assign(invoices.get(id), { status: 'paid' }));
-  console.log(invoices.get(id));
+  console.log(id)
+  invoices.get(id).status = 'paid';
+
+
 }
 function editInvoice(id, invoice) {
   invoices.set(id, Object.assign(invoices.get(id), invoice));
@@ -49,4 +52,6 @@ module.exports = {
   removeInvoice,
   markAsPaid,
   editInvoice,
+  getInvoice,
+  invoices
 };

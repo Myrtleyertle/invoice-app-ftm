@@ -1,42 +1,38 @@
 import React, { useCallback, useReducer } from 'react';
-import { httpAddNewInvoice, httpGetInvoices, httpDeleteInvoice, httpEditInvoice, httpMarkAsPaid, httpGetInvoice } from './requests';
+import { httpAddNewInvoice, httpGetAllInvoices, httpDeleteInvoice, httpEditInvoice, httpMarkAsPaid } from './requests';
 import { DataContext } from './DataContext';
 import { dataReducer } from './dataReducer';
 import {
     GET_INVOICES,
-    ADD_INVOICE,
-    DELETE_INVOICE,
     SET_FILTER,
     SET_ACTIVE_INVOICE,
-    ADD_NEW_ITEM,
+    SET_INDEX
 
-} from '../type'
-
+} from '../type';
 
 export const DataState = (props) => {
     const initialState = {
         invoices: [],
         activeInvoice: {},
         filter: '',
+        index: 0
     }
     const [state, dispatch] = useReducer(dataReducer, initialState);
 
    const getInvoices = useCallback(async () => {
-       const invoices = await httpGetInvoices();
-       console.log(invoices)
+       const {data}  = await httpGetAllInvoices();
+       console.log(data)
        dispatch({
         type: GET_INVOICES,
-        payload: invoices
+        payload: data
        })
    }, [])
    
-   React.useEffect(() => {
-       getInvoices();
-       }, [getInvoices])
-   
     const setActiveInvoice = (index) => {
         const invoice = state.invoices[index];
-        dispatch({ type: SET_ACTIVE_INVOICE, payload: invoice });
+        sessionStorage.setItem('activeInvoice', JSON.stringify(invoice));
+        const invc = JSON.parse(sessionStorage.getItem('activeInvoice'));
+        dispatch({ type: SET_ACTIVE_INVOICE, payload: invc });
     }
     const setFilter = (e) => {
         dispatch({ type: SET_FILTER , payload: e.target.value});
@@ -109,12 +105,13 @@ export const DataState = (props) => {
         if(success){
             getInvoices()
         } else {
-            return response.json(500).catch(error => {
-                console.log(error)
-            })
+            console.log('no')
         
         }
     }, [getInvoices])
+    const setIndex = (id) =>{
+        dispatch({ type: SET_INDEX, payload: id })
+    }
     const editInvoice = useCallback(async (e, id) => {
 
         e.preventDefault();
@@ -179,27 +176,21 @@ export const DataState = (props) => {
         if(success){
             getInvoices()
         } else {
-            return response.json(500).catch(error => {
-                console.log(error)
-            })
+            console.log('nope')
             
         }
     }, [getInvoices])
 
-   const getInvoice = useCallback(async (id) => {
-        const response = await httpGetInvoice()
-        const success = response.ok
-        if(success){
-            dispatch({
-                type: GET_INVOICES,
-                payload: response
-            })
+    const getInvoice = () => {
+        if(sessionStorage.getItem('activeInvoice') === null || sessionStorage.getItem('activeInvoice') === undefined){
+            const invc = JSON.parse(sessionStorage.getItem('activeInvoice'));
+            dispatch({ type: SET_ACTIVE_INVOICE, payload: invc });
         } else {
-            return response.json(500).catch(err => {
-                console.log(err)
-            })
+            const invc = JSON.parse(sessionStorage.getItem('activeInvoice'));
+            dispatch({ type: SET_ACTIVE_INVOICE, payload: invc });
         }
-    },  [])
+    }
+   
     return (
         <DataContext.Provider value={{
             invoices: state.invoices,
@@ -208,12 +199,14 @@ export const DataState = (props) => {
             filter: state.filter,
             setFilter,
             getInvoices,
-            getInvoice,
             setActiveInvoice,
             submitNewInvoice,
             deleteInvoice,
             editInvoice,
-            markAsPaid
+            markAsPaid,
+            setIndex,
+            index: state.index,
+            getInvoice
         }}>
             {props.children}
         </DataContext.Provider>
