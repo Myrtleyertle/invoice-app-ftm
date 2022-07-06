@@ -1,7 +1,7 @@
 import { useContext, Fragment, useState } from "react";
 import ReactDOM from "react-dom";
 import { Button, Form } from "react-bootstrap";
-import classes from "./NewInvoiceModal.module.css";
+import classes from "../App.module.css";
 import { DataContext } from "../data/state/DataContext";
 
 export const ModalOverlay = (props) => {

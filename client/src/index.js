@@ -7,11 +7,6 @@ import { Invoice } from "./pages/invoices/Invoice";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <DataState>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/Invoice/:id" element={<Invoice />} />
-      </Routes>
-    </BrowserRouter>
+   <App />
   </DataState>
 );

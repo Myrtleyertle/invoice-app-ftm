@@ -1,3 +1,32 @@
+
+:root {
+  --background: white;
+  --text-primary: rgb(255, 255, 255);
+  --text-secondary: rgb(34, 35, 39);
+  --text-gridmini: rgb(255, 255, 255);
+  --boxshadow: white;
+  --accent: purple;
+}
+
+[data-theme="dark"] {
+  --background: hsl(207, 26%, 17%);
+  --text-primary: hsl(0, 0%, 100%);
+  --text-secondary: grey;
+  --text-gridmini: rgb(255, 255, 255);
+  --accent: darkred;
+  --boxshadow: hsl(209, 23%, 12%);
+  --sidebarbackgroundcolor: #373b53;;
+}
+
+[data-theme="light"] {
+  --background: hsl(0, 0%, 90%);
+  --text-primary: hsl(200, 15%, 8%);
+  --text-secondary: rgb(189, 189, 190);
+  --accent: purple;
+  --sidebarbackgroundcolor: hsl(0, 0%, 98%);
+  --boxshadow: hsl(0, 0%, 100%);
+  --text-gridmini: rgb(0, 0, 0);
+}
 .btnheader{
     display: flex;
     justify-content: space-between;
@@ -11,7 +40,7 @@
   padding: 30px;
   height: max-content;
   flex-direction: column;
-  background-color: aliceblue;
+  background-color: red;
   z-index: 12;
 }
 .offcanvas{

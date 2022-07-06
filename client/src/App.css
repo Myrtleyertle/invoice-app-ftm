@@ -1,38 +1,311 @@
-.App {
-  text-align: center;
+.App{
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+}
+body{
+  font-family: 'League Spartan', sans-serif;
+  margin: 0;
+  background-color: var(--background-color);
+}
+:root {
+  --background: white;
+  --text-primary: rgb(255, 255, 255);
+  --text-secondary: rgb(34, 35, 39);
+  --text-gridmini: rgb(255, 255, 255);
+  --boxshadow: white;
+  --accent: purple;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+[data-theme="dark"] {
+  --background: hsl(207, 26%, 17%);
+  --text-primary: hsl(0, 0%, 100%);
+  --text-secondary: grey;
+  --text-gridmini: rgb(255, 255, 255);
+  --accent: darkred;
+  --boxshadow: hsl(209, 23%, 12%);
+  --gridbackgroundcolor: hsl(209, 23%, 22%);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+[data-theme="light"] {
+  --background: hsl(0, 0%, 90%);
+  --text-primary: hsl(200, 15%, 8%);
+  --text-secondary: rgb(189, 189, 190);
+  --accent: purple;
+  --gridbackgroundcolor: hsl(0, 0%, 98%);
+  --boxshadow: hsl(0, 0%, 55%);
+  --text-gridmini: rgb(0, 0, 0);
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.sidebar {
+  background-color: #373b53;
+  margin: 0;
+  padding: 0 10px;
+  height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
+  border-radius: 0 13px 13px 0px;
+  z-index: 3;
+}
+
+.iconcontainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  margin: -10px;
+  width: 75px;
+  height: 100px;
+  border-radius: 0 13px 13px 0px;
+  background: linear-gradient(
+    217deg,
+    rgba(53, 14, 142, 1) 0%,
+    rgba(60, 9, 121, 1) 33%,
+    rgba(27, 0, 255, 1) 100%
+  );
 }
 
-.App-link {
-  color: #61dafb;
+.invoicesheader{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 25px 5px;
+}
+.headertitle{
+  margin: 0;
+
+}
+.subtitle{
+  margin: 0;
+  font-size: 25px;
+}
+.select{
+  border: none;
+  background-color: transparent;
+}
+.invbtn{
+  margin: 0;
+  padding: 20px;
+  height: 50px;
+  border: none;
+  background-color: rgb(155, 54, 238);;
+  border-radius: 20px;
+  font-size: 1rem;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+button:hover{
+  color: rgb(255, 255, 255);
+  transform: scale(1.1);
+}
+.plus{
+  background-color: #f0ecec;
+  color: rgb(122, 38, 190);
+  border-radius: 55%;
+  padding: 5px;
+  margin: 0 10px;
+}
+.invoiceslist{
+  display: flex;
+  flex-direction: column;
+}
+.invoices{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 10px;
+  padding: 25px;
+  background-color: #f8f8f8;
+  border-radius: 10px;
+}
+.invoices:hover {
+  border: #384046 1px solid;
+  transform: scale(1.04);
+  cursor: pointer;
+}
+.link:link{
+  text-decoration: none;
+}
+.header{
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+}
+.body{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+}
+.clientName{
+  margin: 0;
+  color: rgb(153, 153, 153)
+}
+
+.createdAt{
+  margin: 0;
+  font-size: 1rem;
+  color: rgb(179, 179, 179);
+}
+.id,
+.total{
+  color: #384046;
+  font-size: 20px;
+  font-weight: 500;
+
+}
+.status{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+}
+.paid{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 5px;
+  width: 50px;
+  color: #44f100;
+}
+.pending{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 5px;
+  width:  70px;
+  color: #ff9800;
+}
+.draft{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 5px;
+  width: 50px;
+  color: #384046;
+}
+.orangecircle{
+  width: 10px;
+  height: 10px;
+  background-color: #ff9800;
+  border-radius: 50%;
+  margin: 0;
+}
+.greencircle{
+  width: 10px;
+  height: 10px;
+  background-color: #44f100;
+  border-radius: 50%;
+  margin: 0;
+}
+.redcircle{
+  width: 10px;
+  height: 10px;
+  background-color: #f44336;
+  border-radius: 50%;
+  margin: 0;
+}
+.darkcircle{
+  width: 10px;
+  height: 10px;
+  background-color: #384046;
+  border-radius: 50%;
+  margin: 0;
+}
+@media (min-width: 768px){
+  .offcanvas{
+      width: 50%;
+      margin-left: 5%;
+      background-color: rgb(255, 255, 255);
+      z-index: 999;
   }
-  to {
-    transform: rotate(360deg);
+  .billform{
+      margin-left: 7%;
+      z-index: 999;
+  }
+  .Address{
+      display: flex;
+  }
+  .backdrop{
+      background-color: rgba(0,0,0,0.5);
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+  }
+  .background{
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+  }
+  .invoicesheader{
+      display: flex;
+      justify-content: space-between;
+      width: 70%;
+      margin: 50px 5px;
+  }
+  .selectbtngroup{
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      width: 30%;
+  }
+  .headertitle{
+      margin: 0;
+      font-size: 45px;
+  }
+  .subtitle{
+      font-size: 13px;
+  }
+  
+  .invoiceslist{
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 70%;
+  }
+  .invoice{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      padding: 25px;
+      gap: 10px;
+  }
+  .invbtn{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+  .viewbtn{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #f0ecec;
+      margin-left: 10px;
+      border: none;
+  }
+  .header{
+      display: flex;
+      justify-content: space-between;
+      margin: 0;
+  }
+  .body{
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin: 0;
+  }
+  .total{
+      display: flex;
+      justify-content: space-between;
+      margin: 0;
   }
 }

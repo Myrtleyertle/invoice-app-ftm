@@ -1,9 +1,32 @@
 
+  
+  [data-theme="dark"] {
+    --background: hsl(207, 26%, 17%);
+    --text-primary: hsl(0, 0%, 100%);
+    --text-secondary: rgb(255, 255, 255);
+    --text-gridmini: rgb(255, 255, 255);
+    --accent: darkred;
+    --boxshadow: hsl(209, 23%, 12%);
+    --sidebarbackgroundcolor: #373b53;
+    --draft: hsl(0, 0%, 100%);
+  }
+  
+  [data-theme="light"] {
+    --background: hsl(0, 0%, 90%);
+    --text-primary: hsl(200, 15%, 8%);
+    --text-secondary: rgb(10, 10, 10);
+    --accent: purple;
+    --sidebarbackgroundcolor: hsl(0, 0%, 98%);
+    --boxshadow: hsl(0, 0%, 100%);
+    --text-gridmini: rgb(0, 0, 0);
+    --draft: hsl(0, 0%, 0%);
+  }
 .invoicesheader{
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 25px 5px;
+    color: var(--text-primary);
 }
 .headertitle{
     margin: 0;
@@ -44,16 +67,17 @@ button:hover{
     display: flex;
     flex-direction: column;
 }
-.invoice{
+.invoices{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-around;
     margin: 10px;
     padding: 25px;
-    background-color: #f8f8f8;
+    background-color: var(--boxshadow);
     border-radius: 10px;
+    color: var(--text-primary);
 }
-.invoice:hover {
+.invoices:hover {
     border: #384046 1px solid;
     transform: scale(1.04);
     cursor: pointer;
@@ -74,17 +98,17 @@ button:hover{
 }
 .clientName{
     margin: 0;
-    color: rgb(153, 153, 153)
+    color: var(--text-secondary);
 }
 
 .createdAt{
     margin: 0;
     font-size: 1rem;
-    color: rgb(179, 179, 179);
+    color: var(--text-primary);
 }
 .id,
 .total{
-    color: #384046;
+    color: var(--text-primary);
     font-size: 20px;
     font-weight: 500;
 
@@ -117,7 +141,7 @@ button:hover{
     align-items: center;
     margin: 0 5px;
     width: 50px;
-    color: #384046;
+    color: var(--draft);
 }
 .orangecircle{
     width: 10px;

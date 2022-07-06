@@ -16,7 +16,6 @@ export const Invoices = () => {
     }
   });
   const Invoices = filteredInvoices.map((invoice, index) => {
-    
     return (
       <Link
         className={classes.link}
@@ -25,7 +24,7 @@ export const Invoices = () => {
           setActiveInvoice(index);
         }}
       >
-        <div className={classes.invoice} key={index}>
+        <div className={classes.invoices} key={index}>
           <div className={classes.id}>#{invoice.id}</div>
           <div className={classes.clientName}>{invoice.clientName}</div>
           <div className={classes.createdAt}>{invoice.createdAt}</div>
@@ -82,13 +81,14 @@ export const Invoices = () => {
             <option value="paid">Paid</option>
             <option value="pending">Pending</option>
           </select>
-          
+
           <button className={classes.invbtn} onClick={() => setShow(!show)}>
             <span className={classes.plus}>+</span> New Invoice{" "}
           </button>
           <NewInvoiceModal show={show} setShow={setShow} />
         </div>
       </div>
+
       <div className={classes.invoiceslist}>{Invoices}</div>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Sidebar } from "../../components/Sidebar";
 import classes from "./Invoice.module.css";
 import { Link } from "react-router-dom";
@@ -17,7 +17,6 @@ export const Invoice = () => {
   console.log(invoice)
   return (
     <div className={classes.invoice}>
-      <Sidebar />
       <div className={classes.invoicecontent}>
         <div className={classes.goback}>
           <Link to="/">
