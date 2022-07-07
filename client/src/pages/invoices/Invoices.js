@@ -88,7 +88,6 @@ export const Invoices = () => {
           <NewInvoiceModal show={show} setShow={setShow} />
         </div>
       </div>
-
       <div className={classes.invoiceslist}>{Invoices}</div>
     </div>
   );

@@ -1,7 +1,7 @@
 import { useContext, Fragment, useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { Button, Form } from "react-bootstrap";
-import classes from "./NewInvoiceModal.module.css";
+import classes from "./EditInvoiceModal.module.css";
 import { DataContext } from "../data/state/DataContext";
 
 export const ModalOverlay = (props, e) => {
@@ -32,7 +32,6 @@ export const ModalOverlay = (props, e) => {
   const items = data.getAll('items');
   return (
     <div className={classes.modaloverlay}>
-      <div className={classes.offcanvas}>
         <div className={classes.btnheader}>
           <h1>Edit #{props.activeInvoice.id}</h1>
         </div>
@@ -238,7 +237,6 @@ export const ModalOverlay = (props, e) => {
             <>{formValid ?  null : <div>All fields must be added</div>}</>
           </Form>
         </div>
-      </div>
     </div>
   );
 };
@@ -254,21 +252,16 @@ const EditInvoiceModal = ({ activeInvoice, show, setShow, index }) => {
   return (
     <Fragment>
       {show
-        ? ReactDOM.createPortal(
-            <Backdrop show={show} setShow={setShow} />,
-            document.getElementById("backdrop-root")
-          )
+        ? 
+            <Backdrop show={show} setShow={setShow} />
         : null}
-      {show
-        ? ReactDOM.createPortal(
+      {show ?
             <ModalOverlay
               activeInvoice={activeInvoice}
               index={index}
               show={show}
               setShow={setShow}
-            />,
-            document.getElementById("modal-root")
-          )
+            />
         : null}
     </Fragment>
   );
